@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 class File(models.Model):
-    owner_name = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    owner_name = models.ForeignKey(User, on_delete=models.CASCADE)
     file = models.FileField(upload_to='files/')
     title = models.CharField(max_length=100)
 
