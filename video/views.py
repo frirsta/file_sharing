@@ -1,10 +1,16 @@
+from typing import Any, Dict
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from .models import File, FileForm
 
 # Create your views here.
+
+
+class HomePageView(ListView):
+    template_name = 'home.html'
+    queryset = File.objects.all()
 
 
 class FileCreateView(CreateView):
@@ -18,6 +24,17 @@ class FileListView(ListView):
     model = File
     template_name = 'files.html'
     context_object_name = 'files'
+
+
+class FileDetailView(DetailView):
+    model = File
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs['pk']
+        file = get_object_or_404(File, pk=pk)
+        context["file"] = File.objects.all()
+        return context
 
 
 def download(request, file_id):

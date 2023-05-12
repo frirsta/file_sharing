@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {%block content%} {% if user.is_authenticated %}
+<h2>files detail</h2>
+<div>
+  {{object.title}} {{object.owner_name}}
+  <a href="{% url 'download' object.id %}">Download</a>
+</div>
+{% else %}
+<div class="staff-container">Staff page</div>
+{%endif %} {%endblock content%}

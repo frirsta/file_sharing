@@ -1,7 +1,9 @@
-{%extends 'base.html'%} {%block content%}
+{%extends 'base.html'%} {%block content%} {% if user.is_authenticated %}
 <h2>Upload file</h2>
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %} {{form.as_p}}
-  <button type='submit'>Upload</button>
+  <button type="submit">Upload</button>
 </form>
-{%endblock content%}
+{% else %}
+<div class="staff-container">Staff page</div>
+{%endif %} {%endblock content%}
